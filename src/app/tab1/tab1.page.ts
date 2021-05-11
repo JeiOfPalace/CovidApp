@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DadesService } from '../services/dades.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  public ultimaDada: Array<any> = [];
+  public ultimaData: String;
 
+  constructor(private dades: DadesService) { }
+
+  ngOnInit() {
+    this.dades.dadesTotals().subscribe(
+      (data: Array<any>) => {
+        this.ultimaDada = data[0]
+        this.ultimaData = this.ultimaDada['data'].slice(0, 10);
+      }
+    )
+  }
 }

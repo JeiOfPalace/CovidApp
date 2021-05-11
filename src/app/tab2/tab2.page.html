@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Totes les dades
     </ion-title>
+    <p slot="end">Filtre</p>
+    <ion-button fill="none" slot="end" (click)="toggleSearchBar()">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +17,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-content *ngIf="show">
+    <ion-searchbar showCancelButton="focus" (input)="filter()" [(ngModel)]="val"></ion-searchbar>
+    {{ val }}
+  </ion-content>
+
+  <ion-list>
+    <ion-item *ngFor="let d of dadesAMostrar">
+      <ion-label>{{ d.data }} {{ d.nous_casos_diaris_confirmats }}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

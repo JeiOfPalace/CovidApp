@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Últimes dades
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,5 +13,52 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-content>
+    <ion-list>
+
+      <ion-item>
+        <ion-title>
+          Ubicació
+        </ion-title>
+        Catalunya
+      </ion-item>
+
+      <ion-item>
+        <ion-title>
+          Data
+        </ion-title>
+        {{ ultimaData }}
+      </ion-item>
+
+      <ion-item>
+        <ion-title>
+          Nous casos diaris confirmats
+        </ion-title>
+        {{ ultimaDada.nous_casos_diaris_confirmats }}
+      </ion-item>
+
+      <ion-item>
+        <ion-title>
+          Total casos confirmats
+        </ion-title>
+        {{ ultimaDada.total_de_casos_confirmats }}
+      </ion-item>
+
+      <ion-item>
+        <ion-title>
+          Defuncions diàries
+        </ion-title>
+        {{ ultimaDada.defuncions_di_ries }}
+      </ion-item>
+
+      <ion-item>
+        <ion-title>
+          Total defuncions
+        </ion-title>
+        {{ ultimaDada.total_de_defuncions }}
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+
 </ion-content>
