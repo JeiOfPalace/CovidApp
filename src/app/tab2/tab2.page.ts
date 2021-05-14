@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DadesService } from '../services/dades.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -12,14 +13,17 @@ export class Tab2Page {
   public dadesTotals: Array<any> = [];
   public dadesAMostrar: Array<String> = [];
   public val: String;
-  constructor(private dades: DadesService) { }
+
+  constructor(
+    private dades: DadesService,
+    public toastController: ToastController
+  ) { }
 
   ngOnInit() {
-    this.dades.dadesTotals().subscribe(
+    this.dades.dadesVacunes().subscribe(
       (data: Array<any>) => {
         this.dadesTotals = data
-        if (this.val == '') this.dadesAMostrar = this.dadesTotals
-        else this.filter()
+        this.dadesAMostrar = this.dadesTotals
       }
     )
   }
@@ -31,9 +35,34 @@ export class Tab2Page {
   filter() {
     this.dadesAMostrar = [];
     for (let i = 0; i < this.dadesTotals.length; i++) {
-      if (this.dadesTotals[i]['data'].indexOf(this.val) > -1) {
+      if (this.dadesTotals[i]['comarca'].indexOf(this.val) > -1) {
         this.dadesAMostrar.push(this.dadesTotals[i])
       }
     }
+    this.filtratToast();
   }
+
+  order() {
+    this.dadesAMostrar.sort();
+    this.ordenatToast();
+  }
+
+  async ordenatToast() {
+    const toast = await this.toastController.create({
+      message: 'Ordenat!',
+      color: 'success',
+      duration: 1000
+    });
+    toast.present();
+  }
+
+  async filtratToast() {
+    const toast = await this.toastController.create({
+      message: 'Filtrat!',
+      color: 'success',
+      duration: 1000
+    });
+    toast.present();
+  }
+
 }

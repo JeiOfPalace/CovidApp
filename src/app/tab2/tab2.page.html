@@ -1,11 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Totes les dades
+      Vacunes
     </ion-title>
     <p slot="end">Filtre</p>
     <ion-button fill="none" slot="end" (click)="toggleSearchBar()">
       <ion-icon name="search-outline"></ion-icon>
+    </ion-button>
+    <p slot="end">Ordenar</p>
+    <ion-button fill="none" slot="end" (click)="order()">
+      <ion-icon name="filter-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -17,14 +21,22 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content *ngIf="show">
-    <ion-searchbar showCancelButton="focus" (input)="filter()" [(ngModel)]="val"></ion-searchbar>
-    {{ val }}
-  </ion-content>
+  <ion-item style="margin-top: 25px" lines="none" *ngIf="show">
+    <ion-searchbar style="--box-shadow:none; --background:rgb(230, 230, 230); --border-radius:25px"
+      showCancelButton="focus" placeholder="Cerca..." (input)="filter()" [(ngModel)]="val"></ion-searchbar>
+  </ion-item>
 
-  <ion-list>
-    <ion-item *ngFor="let d of dadesAMostrar">
-      <ion-label>{{ d.data }} {{ d.nous_casos_diaris_confirmats }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-list lines="none" style="display:flex">
+      <ion-item style="min-width:140px; max-width:140px"><strong>Comarca</strong></ion-item>
+      <ion-item style="min-width:140px; max-width:140px"><strong>Fabricant</strong></ion-item>
+      <ion-item style="min-width:140px; max-width:140px"><strong>Vacunats</strong></ion-item>
+    </ion-list>
+  </ion-item>
+
+  <ion-item *ngFor="let d of dadesAMostrar">
+    <ion-item lines="none" style="min-width:140px; max-width:140px">{{ d.comarca }}</ion-item>
+    <ion-item lines="none" style="min-width:140px; max-width:140px">{{ d.fabricant }}</ion-item>
+    <ion-item lines="none" style="min-width:140px; max-width:140px">{{ d.total }}</ion-item>
+  </ion-item>
 </ion-content>
